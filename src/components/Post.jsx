@@ -10,7 +10,6 @@ import styles from './Post.module.css';
 
 export function Post({ author, publishedAt, content }) {
   const [comment, setComment] = useState([
-    'POst muito foda'
   ])
 
   const [newCommentText, setNewCommentText] = useState('')
@@ -27,24 +26,25 @@ export function Post({ author, publishedAt, content }) {
   function handleCreateNewComment() {
     event.preventDefault()
    
-    setComment([...comment, newCommentText])
-    setNewCommentText('')
+    setComment([...comment, newCommentText]);
+    setNewCommentText('');
   }
 
   function handleNewCommentChange() {
-    setNewCommentText(event.target.value)
+    event.target.setCustomValidity('');
+    setNewCommentText(event.target.value);
   }
 
   function handleNewCommentInvalaid() {
-    console.log(event)
+    event.target.setCustomValidity('Esse campo é obrigatório!');
   }
 
-  function deleteComment(Comment) {
-    const commentsWithoutDeletedOne = comments.filter(comment => {
+  function deleteComment(commentToDelete) {
+    const commentWithoutDeletedOne = comment.filter(comment => {
       return comment !== commentToDelete;
     })
     
-    setComment(commentsWithoutDeletedOne)
+    setComment(commentWithoutDeletedOne)
   }
 
   return (
